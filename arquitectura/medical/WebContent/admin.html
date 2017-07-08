@@ -7,7 +7,7 @@
 
 <script type="text/javascript">
 	var id = sessionStorage.getItem("id");
-	console.log("id en admin "+id);
+	console.log("id en admin " + id);
 	if (id === null) {
 		window.location.href = 'index.html';
 	} else {
@@ -18,11 +18,11 @@
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				var json = JSON.parse(xhr.responseText);
-				console.log("retorno de verificacion "+JSON.stringify(json));
-				
+				console.log("retorno de verificacion " + JSON.stringify(json));
+
 				if (json.message !== "true") {
 					window.location.href = 'index.html';
-				} 
+				}
 				//  window.location.href = json.message;
 			}
 		};
@@ -32,9 +32,26 @@
 
 		xhr.send(data);
 	}
-	
-
 </script>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="css/bootstrap-select.min.css"
+	type="text/css">
+<link rel="stylesheet" href="css/proyectocs.css" type="text/css">
+<link rel="stylesheet" href="css/c3.min.css" type="text/css">
+<script src="js/jquery-2.2.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/validator.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+<script src="js/sugar.min.js"></script>
+<script src="js/jquerymy-1.2.10.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/doctor.view.js"></script>
+<script src="js/doctor.controller.js"></script>
+<script src="js/d3.min.js"></script>
+<script src="js/c3.min.js"></script>
 
 </head>
 
@@ -42,13 +59,9 @@
 
 	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"
 		hidden="true"></div>
-
 	<script>
 		function onSignIn(googleUser) {
-			// Useful data for your client-side scripts:
 			var profile = googleUser.getBasicProfile();
-
-			// The ID token you need to pass to your backend:
 			var id_token = googleUser.getAuthResponse().id_token;
 		};
 	</script>
@@ -66,5 +79,223 @@
 			});
 		}
 	</script>
+	
+	
+	
+	
+	<div class='divContenedor'>	
+		<form id='formDoctor' class='formDoctor' data-toggle="validator" role="form">
+			<div class='form-group'>		
+				<div class="row">
+					<div class='col-sm-2'>
+						<label for='documento' class='control-label'>Documento del paciente</label>					
+					</div>								
+					<div class='col-sm-2'>
+						<input type="text" class='form-control' id='documento' size="4" required value="">
+					</div>					
+					<div class='col-sm-1'>					
+						<input type="button" class="btn btn-primary" id='consultar' onclick="consultarEpisodios()" value="Consultar">
+					</div>				
+					<div class='col-sm-1 checkbox'>					
+						<label><input type="checkbox" value="" id="filtrar" onchange="conmutarFiltros();">Filtrar</label>					
+					</div>
+					<div class='col-sm-1 ocultoInicial'>
+						<label for='fechaInicio' class='control-label'>Fecha inicial</label>					
+					</div>
+					<div class='col-sm-2 ocultoInicial'>
+						<input type="date" class='form-control' id='fechaInicio'>
+					</div>
+					<div class='col-sm-1 ocultoInicial'>
+						<label for='fechaFin' class='control-label'>Fecha final</label>					
+					</div>
+					<div class='col-sm-2 ocultoInicial'>
+						<input type="date" class='form-control' id='fechaFin'>
+					</div>
+				</div>
+			</div>		
+			<div class="row">			
+				<div class='form-group col-sm-12'>
+					<input type="button" class="btn btn-primary ocultoInicial" id='grafica' onclick="mostrarGrafica()" value="Mostrar gráfica evolución de los episodios">
+				</div>
+			</div>			
+			<div class='form-group'>		
+				<div class="alert alert-danger mensajeError" role="alert">
+					Mensaje de error
+				</div>
+				<div class="alert alert-success mensajeOK" role="alert">
+					Mensaje satisfactorio
+				</div>
+			</div>			
+			<div id="episodios">							
+				<div class='form-group group-border'>
+					<div id="idEpisodio">
+						<input type="hidden" id="oid">
+					</div>
+					<div class="row">				
+						<div class='form-group col-sm-4'>
+							<label for='fecha' class='control-label'>Fecha</label>
+							<input type="date" class='form-control' id='fecha' disabled>
+						</div>				
+						<div class='form-group col-sm-4'>
+							<label for='nivelDolor' class='control-label'>Nivel de dolor</label>
+							<select id="nivelDolor" class="form-control nivelDolor"></select>
+						</div>											
+						<div class='form-group col-sm-4'>
+							<label for='localizacionDolor' class='control-label'>Localización del dolor</label>
+							<input type="text" class='form-control' id='localizacionDolor' disabled>
+						</div>															
+					</div>				
+					<div class="row">					
+						<div class='form-group col-sm-12'>
+							<label for='patronSueno' class='control-label'>Patrón de sueño</label>						
+							<textarea class='form-control' rows="2" cols="50" id='patronSueno' disabled></textarea>
+						</div>					
+					</div>					
+					<div class="row">					
+						<div class='form-group col-sm-12'>
+							<label for='actividadFisica' class='control-label'>Actividades físicas</label>						
+							<select id="actividadFisica" class="form-control actividadFisica" multiple></select>
+						</div>					
+					</div>									
+					<div class="row">				
+						<div class='form-group col-sm-6'>
+							<label for='alimentos' class='control-label'>Alimentos</label>						
+							<select id="alimentos" class="form-control alimentos" multiple></select>
+						</div>				
+						<div class='form-group col-sm-6'>
+							<label for='bebidas' class='control-label'>Bebidas</label>						
+							<select id="bebidas" class="form-control bebidas" multiple></select>
+						</div>																
+					</div>	
+					<div class="row">			
+						<div class='form-group col-sm-12'>
+							<input type="button" class="btn btn-primary" id='consultarDetalle' onclick="detalleEpisodio(this)" value="Análisis episodio">
+						</div>
+					</div>			
+				</div>				
+			</div>		
+		</form>		
+	
+	<!-- Análisis episodio -->
+		<div class="modal fade" id="modalDetalles" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="modalLabel">Detalles del episodio de Migraña</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div id="datosEpisodio">
+								<div class="row">
+									<div class='form-group col-sm-6'>
+										<label for='nivelDolor' class='control-label'>Nivel de dolor</label>
+										<select id="nivelDolor" class="form-control nivelDolor"></select>
+									</div>											
+									<div class='form-group col-sm-6'>
+										<label for='localizacionDolor' class='control-label'>Localización del dolor</label>
+										<input type="text" class='form-control' id='localizacionDolor' disabled>
+									</div>	
+								</div>
+								<div class="form-group group-border">
+									<label class="title-blue">Medicamentos</label>
+									<div class="row" id="medicamentos">																			
+										<div>
+											<div class='form-group col-sm-9'>
+												<label for='nombre' class='control-label'>Nombre medicamento</label>
+												<input type="text" class='form-control' id='nombre' disabled>
+											</div>	
+											<div class='form-group col-sm-3'>
+												<label for='dosis' class='control-label'>Dosis</label>
+												<input type="text" class='form-control' id='dosis' disabled>
+											</div>														
+										</div>											
+									</div>										
+								</div>										
+							</div>						
+							<div id="catalizadores">
+								<div class="form-group group-border">
+									<label class="title-blue">Catalizadores actividades físicas</label>
+									<div class="row" id="actividadFisica">							
+										<div>
+											<div class="form-group col-sm-4">
+												<label for="catalizador" class="control-label">Catalizador</label>
+												<input type="text" class="form-control" id="catalizador" disabled>
+											</div>
+											<div class="form-group col-sm-8">
+												<label for="observacion" class="control-label">Observación</label>
+												<textarea type="text" class="form-control" id="observacion" disabled></textarea>
+											</div>
+										</div>							
+									</div>
+								</div>
+								<div class="form-group group-border">												
+									<label class="title-blue">Catalizadores alimentos</label>
+									<div class="row" id="alimentos">
+										<div>
+											<div id="catalizadores">
+												<div class="form-group col-sm-4">
+													<label for="catalizador" class="control-label">Catalizador</label>
+													<input type="text" class="form-control" id="catalizador" disabled>
+												</div>
+												<div class="form-group col-sm-8">
+													<label for="observacion" class="control-label">Observación</label>
+													<textarea type="text" class="form-control" id="observacion" disabled></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group group-border">	
+									<label class="title-blue">Catalizadores bebidas</label>
+									<div class="row" id="bebidas">
+										<div>
+											<div id="catalizadores">
+												<div class="form-group col-sm-4">
+													<label for="catalizador" class="control-label">Catalizador</label>
+													<input type="text" class="form-control" id="catalizador" disabled>
+												</div>
+												<div class="form-group col-sm-8">
+													<label for="observacion" class="control-label">Observación</label>
+													<textarea class="form-control" id="observacion" disabled></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>											
+							</div>
+						</form>
+					</div>      
+					<div class="modal-footer">									
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Gráfica de episodios -->
+		<div class="modal fade" id="modalGrafica" tabindex="-1" role="dialog" aria-labelledby="modalLabelGrafica">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="modalLabelGrafica">Evolución de los episodios de migraña</h4>
+					</div>
+					<div class="modal-body">
+						<div id="chart"></div>	
+					</div>      
+					<div class="modal-footer">									
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 </body>
 </html>

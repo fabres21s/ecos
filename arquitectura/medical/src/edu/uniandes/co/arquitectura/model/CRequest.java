@@ -1,4 +1,4 @@
-package edu.uniandes.edu.arquitectura.model;
+package edu.uniandes.co.arquitectura.model;
 
 
 /**

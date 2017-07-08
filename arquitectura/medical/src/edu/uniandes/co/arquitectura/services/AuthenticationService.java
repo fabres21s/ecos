@@ -1,4 +1,4 @@
-package edu.uniandes.edu.arquitectura.services;
+package edu.uniandes.co.arquitectura.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,9 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import edu.uniandes.edu.arquitectura.model.CRequest;
-import edu.uniandes.edu.arquitectura.model.CResponse;
-import edu.uniandes.edu.arquitectura.session.Session;
+import edu.uniandes.co.arquitectura.model.CRequest;
+import edu.uniandes.co.arquitectura.model.CResponse;
+import edu.uniandes.co.arquitectura.session.Session;
 
 @Path("auth")
 public class AuthenticationService {

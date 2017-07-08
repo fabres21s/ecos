@@ -1,0 +1,186 @@
+@CHARSET "ISO-8859-1";
+.divContenedor {
+    background-color: #fff;        
+    margin: 20px;	    
+    position: relative;
+	min-height: 600px;	
+}
+.h-divider{
+	margin: 10px 0;
+	height:1px;
+	width:100%;
+	border-top:1px dashed #2ba0d2;	
+}
+
+.mensajeError, .mensajeOK{
+	display:none;
+}
+
+.header{
+	font-weight:bold;
+	text-align:center;
+	padding: 0;
+}
+.ocultoInicial{
+	display:none;
+}
+.m-left{
+	margin-left:10px;
+}
+textarea {
+  resize: vertical;
+} 
+.title-blue{
+	color: #2ba0d2;
+	font-weight:bold;
+}
+.group-border{
+	border-radius: 4px;
+	border-width: 1px;
+	border-color: #2ba0d2;
+	border-style: dotted;
+	box-shadow: none;
+	padding: 10px;	
+	margin-top: 10px;
+}
+.dropdown-menu>.selected>a, .dropdown-menu>.selected>a:focus, .dropdown-menu>.selected>a:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #2ba0d2;
+    outline: 0;
+}
+.delClasifValue{
+	margin-top: 30px;	
+}
+.date{
+	display:none;
+}
+.btnTop{
+	top: 2px;
+}
+.tooltip-grafica{
+	background-color: #ddd;		
+	border-radius: 5px;
+	border: 1px solid #bbb;
+	font-size: 11px;
+	line-height: 11px;	
+	padding: .1rem;
+}
+.table{
+	margin-bottom: 0 !important;
+}
+.table td, .table th {
+    padding: .3rem !important;         
+}
+
+/******* Estilos mensajes *******/
+.mensajeError, .mensajeOK{
+	background-color: white;
+	border-color: #ccc;
+}
+/******* Estilos mensajes *******/
+
+/******* Estilos tooltip ********/
+.ttstyle + .tooltip > .tooltip-inner {
+    background-color: #2ba0d2;
+    color: #FFFFFF;
+    border: 1px solid #2ba0d2;
+    padding: 5px;    
+	font-size:12px;
+}
+/* Tooltip on bottom */
+.ttstyle + .tooltip.bottom > .tooltip-arrow {
+    border-bottom: 5px solid #2ba0d2;
+}
+/******* Estilos tooltip ********/
+
+/******* Estilos loading ********/
+.custom-overlay{
+    background-color: black;
+    background-image: none;
+    opacity: 0.6;
+	filter: Alpha(Opacity=60);
+    z-index: 1040;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    top: 0;
+}
+.modal-content{
+	/*margin-top: 50%;*/	
+}
+.ui-loading .ui-loader {
+    display: block;
+}
+.ui-loader-verbose {
+    width: 200px;
+    filter: Alpha(Opacity=100);
+    opacity: 1;
+    box-shadow: 0 1px 1px -1px #fff;
+    height: auto;
+    margin-left: -110px;
+    margin-top: -43px;
+    padding: 10px;
+}
+.ui-loader {
+    display: block;
+    z-index: 9999999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border: 0;
+}
+.ui-corner-all {
+	-moz-border-radius: .6em /*{global-radii-blocks}*/;
+    -webkit-border-radius: .6em /*{global-radii-blocks}*/;
+    border-radius: .6em /*{global-radii-blocks}*/;
+}
+.ui-loader-verbose h1 {
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+}
+.ui-loader-verbose .ui-icon {
+    margin: 0 auto 10px;
+     filter: Alpha(Opacity=75);
+    opacity: .75;
+}
+.ui-loader .ui-icon {
+    background-color: #000;
+    display: block;    
+    width: 44px;
+    height: 44px;
+    padding: 1px;
+    -webkit-border-radius: 36px;
+    -moz-border-radius: 36px;
+    border-radius: 36px;
+}
+.ui-icon {
+    width: 18px;
+    height: 18px;
+}
+.ui-icon-loading {
+    background: url(../images/ajax-loader.gif);
+    background-size: 44px 44px;
+}
+.ui-body-c, .ui-overlay-c {
+    border: 1px solid #aaa /*{c-body-border}*/;
+    color: #333 /*{c-body-color}*/;
+    text-shadow: 0 /*{c-body-shadow-x}*/ 1px /*{c-body-shadow-y}*/ 0 /*{c-body-shadow-radius}*/ #fff /*{c-body-shadow-color}*/;
+    background: #f9f9f9 /*{c-body-background-color}*/;
+    background-image: -webkit-gradient(linear, left top, left bottom, from( #f9f9f9 /*{c-body-background-start}*/), to( #eee /*{c-body-background-end}*/));
+    background-image: -webkit-linear-gradient( #f9f9f9 /*{c-body-background-start}*/, #eee /*{c-body-background-end}*/);
+    background-image: -moz-linear-gradient( #f9f9f9 /*{c-body-background-start}*/, #eee /*{c-body-background-end}*/);
+    background-image: -ms-linear-gradient( #f9f9f9 /*{c-body-background-start}*/, #eee /*{c-body-background-end}*/);
+    background-image: -o-linear-gradient( #f9f9f9 /*{c-body-background-start}*/, #eee /*{c-body-background-end}*/);
+    background-image: linear-gradient( #f9f9f9 /*{c-body-background-start}*/, #eee /*{c-body-background-end}*/);
+}
+.ui-loader h1 {
+    display: block;    
+    -webkit-margin-before: 0.67em;    
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+/******* Estilos loading ********/
