@@ -5,7 +5,36 @@
 	content="469053930172-4n5kgh8rvuaed0skmam68km4g7n2qi3f.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
+<script type="text/javascript">
+	var id = sessionStorage.getItem("id");
+	console.log("id en admin "+id);
+	if (id === null) {
+		window.location.href = 'index.html';
+	} else {
+		var xhr = new XMLHttpRequest();
+		var url = "http://localhost:8080/medical/services/auth/validate";
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				var json = JSON.parse(xhr.responseText);
+				console.log("retorno de verificacion "+JSON.stringify(json));
+				
+				if (json.message !== "true") {
+					window.location.href = 'index.html';
+				} 
+				//  window.location.href = json.message;
+			}
+		};
+		var data = JSON.stringify({
+			"id" : id
+		});
 
+		xhr.send(data);
+	}
+	
+
+</script>
 
 </head>
 
@@ -31,7 +60,7 @@
 		function signOut() {
 			var auth2 = gapi.auth2.getAuthInstance();
 			auth2.signOut().then(function() {
-	
+
 				sessionStorage.clear();
 				window.location.href = 'index.html';
 			});
