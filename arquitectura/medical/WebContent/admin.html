@@ -6,8 +6,7 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <script type="text/javascript">
-	var id = sessionStorage.getItem("id");
-	console.log("id en admin " + id);
+	var id = sessionStorage.getItem("hash");
 	if (id === null) {
 		window.location.href = 'index.html';
 	} else {
@@ -18,16 +17,14 @@
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				var json = JSON.parse(xhr.responseText);
-				console.log("retorno de verificacion " + JSON.stringify(json));
 
 				if (json.message !== "true") {
 					window.location.href = 'index.html';
 				}
-				//  window.location.href = json.message;
 			}
 		};
 		var data = JSON.stringify({
-			"id" : id
+			"hash" : id
 		});
 
 		xhr.send(data);
@@ -57,26 +54,33 @@
 
 <body>
 
-	<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"
-		hidden="true"></div>
-	<script>
-		function onSignIn(googleUser) {
-			var profile = googleUser.getBasicProfile();
-			var id_token = googleUser.getAuthResponse().id_token;
-		};
-	</script>
+
 
 	<h3>Admin page</h3>
 
 	<a href="#" onclick="signOut();">Sign out</a>
 	<script>
 		function signOut() {
-			var auth2 = gapi.auth2.getAuthInstance();
-			auth2.signOut().then(function() {
-
-				sessionStorage.clear();
-				window.location.href = 'index.html';
+			sessionStorage.clear();
+			
+			
+			var xhr = new XMLHttpRequest();
+			var url = "http://localhost:8080/medical/services/auth/remove";
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-type", "application/json");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					
+				}
+			};
+			var data = JSON.stringify({
+				"hash" : id
 			});
+
+			xhr.send(data);
+			
+			
+			window.location.href = 'index.html';
 		}
 	</script>
 	

@@ -9,7 +9,14 @@ public class CResponse {
 
 	private Object response;
 	private String message;
+	private String hash;
 	
+	public String getHash() {
+		return hash;
+	}
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
 	public Object getResponse() {
 		return response;
 	}

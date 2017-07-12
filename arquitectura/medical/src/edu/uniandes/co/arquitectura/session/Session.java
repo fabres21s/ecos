@@ -25,11 +25,15 @@ public class Session {
 	
 	public boolean get(String id) {
 		if (mapSession.get(id) != null) {
-			if (System.currentTimeMillis() - mapSession.get(id) > 15000) {
+			if (System.currentTimeMillis() - mapSession.get(id) > 150000) {
 				return false;
 			}
 			return true;
 		}
 		return false;
+	}
+	
+	public void remove(String hash) {
+		mapSession.remove(hash);
 	}
 }

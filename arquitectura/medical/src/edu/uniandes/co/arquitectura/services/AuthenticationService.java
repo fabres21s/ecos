@@ -1,6 +1,5 @@
 package edu.uniandes.co.arquitectura.services;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.ws.rs.Consumes;
@@ -13,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import edu.uniandes.co.arquitectura.model.CRequest;
 import edu.uniandes.co.arquitectura.model.CResponse;
 import edu.uniandes.co.arquitectura.session.Session;
+import edu.uniandes.co.arquitectura.utils.Utils;
 
 @Path("auth")
 public class AuthenticationService {
@@ -32,9 +32,11 @@ public class AuthenticationService {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
 	public CResponse login(CRequest<String> cRequest)  {
-		Session.getInstance().add(cRequest.getId());
+		String hash = Utils.getIntance().sha256(cRequest.getPassword() + ":::"+ System.currentTimeMillis());
+		Session.getInstance().add(hash);
 		CResponse cResponse = new CResponse();
 		cResponse.setMessage("admin.html");
+		cResponse.setHash(hash);
 		return cResponse;
 	}
 	
@@ -44,8 +46,19 @@ public class AuthenticationService {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public CResponse validate(CRequest<String> cRequest)  {
 		CResponse cResponse = new CResponse();
-		cResponse.setMessage(String.valueOf(Session.getInstance().get(cRequest.getId())));
+		cResponse.setMessage(String.valueOf(Session.getInstance().get(cRequest.getHash())));
 		
+		
+		return cResponse;
+	}
+	
+	@POST
+	@Path("/remove")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+	public CResponse remove(CRequest<String> cRequest)  {
+		CResponse cResponse = new CResponse();
+		Session.getInstance().remove(cRequest.getHash());
 		
 		return cResponse;
 	}

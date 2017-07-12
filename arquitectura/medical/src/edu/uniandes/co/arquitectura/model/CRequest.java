@@ -13,14 +13,21 @@ public class CRequest<T> {
 
 	
 	private T data;
-	private String id;
+	private String password;
 	private String email;
+	private String hash;
 	
-	public String getId() {
-		return id;
+	public String getHash() {
+		return hash;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getEmail() {
 		return email;

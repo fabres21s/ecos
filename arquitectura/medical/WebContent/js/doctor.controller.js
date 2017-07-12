@@ -69,3 +69,30 @@ function detalleEpisodio(obj){
 	});	
 	bindDetallesEpisodio(dataEpisodio);
 }
+
+
+function onSignIn() {
+
+    
+    var email = $('#email').val();
+	var password = $("#password").val();
+
+    
+    var xhr = new XMLHttpRequest();
+    var url = "http://localhost:8080/medical/services/auth/login";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+        	
+            var json = JSON.parse(xhr.responseText);
+            sessionStorage.setItem("hash", json.hash);
+            window.location.href = json.message;
+            
+        }
+    };
+    var data = JSON.stringify({"password": password, "email": email});
+    
+    xhr.send(data);
+    
+  };
