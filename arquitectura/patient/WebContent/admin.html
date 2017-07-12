@@ -17,6 +17,35 @@
 </head>
 <body style="margin:auto;">
 
+
+<h3>Patient page</h3>
+
+	<a href="#" onclick="signOut();">Sign out</a>
+	<script>
+		function signOut() {
+			sessionStorage.clear();
+			
+			
+			var xhr = new XMLHttpRequest();
+			var url = "http://172.24.99.137:8000/patient/services/auth/remove";
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-type", "application/json");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					
+				}
+			};
+			var data = JSON.stringify({
+				"hash" : id
+			});
+
+			xhr.send(data);
+			
+			
+			window.location.href = 'index.html';
+		}
+	</script>
+
 <div class='divContenedor'>	
 	<form id='formPaciente' class='formPaciente' data-toggle="validator" role="form">									
 		<div class='form-group' >		
