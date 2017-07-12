@@ -14,6 +14,33 @@
 	<script src="js/utils.js"></script>	
 	<script src="js/paciente.view.js"></script>
 	<script src="js/paciente.controller.js"></script>	
+	
+	<script type="text/javascript">
+	var id = sessionStorage.getItem("hash");
+	if (id === null) {
+		window.location.href = 'index.html';
+	} else {
+		var xhr = new XMLHttpRequest();
+		var url = "http://172.24.99.137:8000/medical/services/auth/validate";
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-type", "application/json");
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				var json = JSON.parse(xhr.responseText);
+
+				if (json.message !== "true") {
+					window.location.href = 'index.html';
+				}
+			}
+		};
+		var data = JSON.stringify({
+			"hash" : id
+		});
+
+		xhr.send(data);
+	}
+</script>
+	
 </head>
 <body style="margin:auto;">
 
