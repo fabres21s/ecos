@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="css/bootstrap-select.min.css" type="text/css">	
+	<link rel="stylesheet" href="css/proyectocs.css" type="text/css">	
+	<script src="js/jquery-2.2.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/validator.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/sugar.min.js"></script>
+	<script src="js/jquerymy-1.2.10.min.js"></script>
+	<script src="js/utils.js"></script>	
+	<script src="js/paciente.view.js"></script>
+	<script src="js/paciente.controller.js"></script>	
+</head>
+<body style="margin:auto;">
+
+<div class='divContenedor'>	
+	<form id='formPaciente' class='formPaciente' data-toggle="validator" role="form">									
+		<div class='form-group' >		
+			<div class="form-group row">
+				<div class='col-sm-3'>
+					<label for='documento' class='control-label'>Documento del paciente</label>					
+					<input type="text" class='form-control' id='documento' size="4" required>
+				</div>												
+			</div>
+			<div class="row">				
+				<div class='form-group col-sm-4'>
+					<label for='fecha' class='control-label'>Fecha</label>
+					<input type="date" class='form-control' id='fecha' required>
+				</div>				
+				<div class='form-group col-sm-4'>
+					<label for='nivelDolor' class='control-label'>Nivel de dolor</label>					
+					<select id="nivelDolor" class="form-control selectpicker" required></select>
+				</div>											
+				<div class='form-group col-sm-4'>
+					<label for='localizacionDolor' class='control-label'>Localización del dolor</label>
+					<input type="text" class='form-control' id='localizacionDolor' >
+				</div>															
+			</div>				
+			<div class="row">					
+				<div class='form-group col-sm-12'>
+					<label for='patronSueno' class='control-label'>Patrón de sueño</label>						
+					<textarea class='form-control' rows="2" cols="50" id='patronSueno' ></textarea>
+				</div>					
+			</div>					
+			<div class="row">					
+				<div class='form-group col-sm-12'>
+					<label for='actividadFisica' class='control-label'>Actividades físicas</label>											
+					<select id="actividadFisica" class="form-control selectpicker" multiple></select>
+				</div>					
+			</div>									
+			<div class="row">				
+				<div class='form-group col-sm-6'>
+					<label for='alimentos' class='control-label'>Alimentos</label>						
+					<select id="alimentos" class="form-control selectpicker" multiple></select>
+				</div>				
+				<div class='form-group col-sm-6'>
+					<label for='bebidas' class='control-label'>Bebidas</label>						
+					<select id="bebidas" class="form-control selectpicker" multiple></select>
+				</div>																
+			</div>	
+			<div class="h-divider"></div>
+			<div class="form-group">
+				<button type="button" class="btn btn-info btn-xs addClasifValue">
+					<span class="glyphicon glyphicon-plus"></span>																								
+				</button>			
+				<label class="title-blue">Medicamentos</label>			
+			</div>	
+				
+			<div class="row" id="medicamentos">																			
+				<div>
+					<div class='form-group col-sm-8'>
+						<label for='nombre' class='control-label'>Nombre medicamento</label>
+						<input type="text" class='form-control' id='nombre' required>
+					</div>	
+					<div class='form-group col-sm-2'>
+						<label for='dosis' class='control-label'>Dosis</label>
+						<input type="text" class='form-control' id='dosis' required>
+					</div>				
+					<div class='form-group col-sm-2'>												
+						<button type="button" class="btn btn-danger btn-xs delClasifValue">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>					
+					</div>									
+				</div>											
+			</div>											
+		</div>		
+	
+		<div class="form-group">
+			<button type="button" id="grabarForm" class="btn btn-primary" onclick="enviarFormulario(); return false;">
+				<span class="glyphicon glyphicon-floppy-disk btnTop"></span><span class='leftOffset5'>Guardar</span>
+			</button>				
+		</div>
+		<div class='form-group'>		
+			<div class="alert alert-danger mensajeError" role="alert">
+				Mensaje de error
+			</div>
+			<div class="alert alert-success mensajeOK" role="alert">
+				Mensaje satisfactorio
+			</div>		
+		</div>
+	</form>	
+</div>
+</body>
+</html>
