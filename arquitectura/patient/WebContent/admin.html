@@ -21,7 +21,7 @@
 		window.location.href = 'index.html';
 	} else {
 		var xhr = new XMLHttpRequest();
-		var url = "http://172.24.99.137:8000/medical/services/auth/validate";
+		var url = "http://172.24.99.137:8000/patient/services/auth/validate";
 		xhr.open("POST", url, true);
 		xhr.setRequestHeader("Content-type", "application/json");
 		xhr.onreadystatechange = function() {
