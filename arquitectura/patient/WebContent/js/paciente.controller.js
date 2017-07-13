@@ -30,7 +30,7 @@ function grabarEpisodio(){
 	myData.fecha = (new Date(myData.fecha)).toISOString();	
 	var datos = JSON.stringify(myData);	
 	limpiarMensajes();
-	var url = "/patient/services/servidor/registrar/";		
+	var url = "http://172.24.99.135:8000/patient/services/servidor/registrar/";		
 	var inicio = new Date().getMilliseconds();	
 	$.ajax({
 		type: "POST",

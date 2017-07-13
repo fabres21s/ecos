@@ -12,11 +12,13 @@ import javax.ws.rs.core.Response.Status;
 
 import org.bson.Document;
 import org.json.JSONException;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
-import co.edu.uniandes.ecos.model.DAOEpisodios;
-import co.edu.uniandes.ecos.model.DAOUsuarios;
-import co.edu.uniandes.ecos.utils.AnalisisEpisodio;
+
+import edu.uniandes.co.arquitectura.model.DAOEpisodios;
+import edu.uniandes.co.arquitectura.model.DAOUsuarios;
+import edu.uniandes.co.arquitectura.utils.AnalisisEpisodio;
 
 /**
  * Servidor para las peticiones REST 

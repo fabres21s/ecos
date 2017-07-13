@@ -12,6 +12,38 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	
+	
+	  <context-param>
+		<description>MongoDB: Base de datos a usar</description>
+		<param-name>mondodb.database</param-name>
+		<param-value>test</param-value>
+	</context-param>
+	<context-param>
+		<description>Dirección/nombre del servidor</description>
+		<param-name>mondodb.hostname</param-name>
+		<param-value>dbserver</param-value>
+	</context-param>
+	<context-param>
+		<description>Puerto del servidor</description>
+		<param-name>mondodb.port</param-name>
+		<param-value>27017</param-value>
+	</context-param>
+	<context-param>
+		<description>Máximo de conexiones permitidas por host</description>
+		<param-name>mondodb.maxConnectionsPerHost</param-name>
+		<param-value>100</param-value>
+	</context-param>
+	<context-param>
+		<description>Mínimo de conexiones por host</description>
+		<param-name>mondodb.minconnectionsPerHost</param-name>
+		<param-value>0</param-value>
+	</context-param>
+	<context-param>
+		<description>Tiempo máximo de conexión sin uso</description>
+		<param-name>mondodb.maxConnectionIdleTime</param-name>
+		<param-value>0</param-value>
+	</context-param>
 
 	<servlet>
 		<servlet-name>serviceJR</servlet-name>
@@ -29,5 +61,9 @@
 		<servlet-name>serviceJR</servlet-name>
 		<url-pattern>/services/*</url-pattern>
 	</servlet-mapping>
+
+	<listener>
+		<listener-class>edu.uniandes.co.arquitectura.services.ContextCM</listener-class>
+	</listener>
 
 </web-app>
