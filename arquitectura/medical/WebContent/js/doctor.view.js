@@ -12,7 +12,7 @@ var $formCatalizadores;	//Formulario con binding a los catalizadores de episodio
  */
 function mostrarEpisodios(datos){	
 	if ($form == undefined){
-		myModel = datos;
+		myModel = JSON.parse(datos);
 		bindEpisodios();		
 	}else{
 		$form.my("data", datos);	//Realiza merge de los datos y actualiza vista/modelo
