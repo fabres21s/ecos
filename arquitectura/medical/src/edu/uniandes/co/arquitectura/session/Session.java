@@ -3,7 +3,6 @@ package edu.uniandes.co.arquitectura.session;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.uniandes.co.arquitectura.model.CRequest;
 
 public class Session {
 

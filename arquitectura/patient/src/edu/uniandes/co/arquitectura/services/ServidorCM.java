@@ -14,9 +14,9 @@ import org.bson.Document;
 import org.json.JSONException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
-
-import edu.uniandes.co.arquitectura.model.DAOEpisodios;
-import edu.uniandes.co.arquitectura.utils.AnalisisEpisodio;
+import co.edu.uniandes.ecos.model.DAOEpisodios;
+import co.edu.uniandes.ecos.model.DAOUsuarios;
+import co.edu.uniandes.ecos.utils.AnalisisEpisodio;
 
 /**
  * Servidor para las peticiones REST 
@@ -33,11 +33,9 @@ public class ServidorCM {
 	public Response registrar(String json) throws JSONException {		
 		BasicDBObject  document = (BasicDBObject ) JSON.parse(json);		
 		String result = DAOEpisodios.registrarEpisodio(new Document(document));
-//		String result = null;
 		if (result == null){
 			result = AnalisisEpisodio.preAnalisisEpisodio(document);	
 		}
-		
 		return Response.status(Status.OK).entity(result).build();
 	}
 	
@@ -64,6 +62,34 @@ public class ServidorCM {
 	public Response analisis(@PathParam("episodio") String episodio) throws JSONException {		
 		String analisis = AnalisisEpisodio.analisisEpisodio((BasicDBObject) JSON.parse(episodio));	
 		return Response.status(Status.OK).entity(analisis).build();		
-	}	
+	}
+	
+	@POST
+	@Path("/crearUsuario")	
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response crearUsuario(String json) throws JSONException {		
+		String result ="";
+		BasicDBObject  document = (BasicDBObject ) JSON.parse(json);				
+		if (DAOUsuarios.crearUsuario(document.getString("usuario"), document.getString("clave"), document.getString("rol")))
+			result = "El usuario se ha creado exitosamente";
+		else
+			result = "No se ha podido crear el usuario";
+		return Response.status(Status.OK).entity(result).build();
+	}
+	
+	@POST
+	@Path("/autenticarUsuario")	
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response autenticarUsuario(String json) throws JSONException {		
+		String result ="";
+		BasicDBObject  document = (BasicDBObject ) JSON.parse(json);				
+		if (DAOUsuarios.autenticarUsuario(document.getString("usuario"), document.getString("clave")))
+			result = "Usuario autenticado correctamente";
+		else
+			result = "Las credenciales no son correctas";
+		return Response.status(Status.OK).entity(result).build();
+	}
 	
 }

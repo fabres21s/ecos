@@ -1,4 +1,4 @@
 git add .
-git commit -m "Logout del paciente"
+git commit -m "integración"
 git push
 
