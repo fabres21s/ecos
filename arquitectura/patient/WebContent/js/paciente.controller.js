@@ -30,7 +30,7 @@ function grabarEpisodio(){
 	myData.fecha = (new Date(myData.fecha)).toISOString();	
 	var datos = JSON.stringify(myData);	
 	limpiarMensajes();
-	var url = "http://172.24.99.136:8080/patient/services/servidor/registrar/";		
+	var url = "http://172.24.99.138:8080/patient/services/servidor/registrar/";		
 	var inicio = new Date().getMilliseconds();	
 	$.ajax({
 		type: "POST",
@@ -53,7 +53,7 @@ function onSignIn() {
 
     
     var xhr = new XMLHttpRequest();
-    var url = "http://172.24.99.136:8080/patient/services/auth/login";
+    var url = "http://172.24.99.138:8080/patient/services/auth/login";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.onreadystatechange = function () {

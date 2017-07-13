@@ -11,7 +11,7 @@
 		window.location.href = 'index.html';
 	} else {
 		var xhr = new XMLHttpRequest();
-		var url = "http://172.24.99.136:8080/medical/services/auth/validate";
+		var url = "http://172.24.99.138:8080/medical/services/auth/validate";
 		xhr.open("POST", url, true);
 		xhr.setRequestHeader("Content-type", "application/json");
 		xhr.onreadystatechange = function() {
@@ -65,7 +65,7 @@
 			
 			
 			var xhr = new XMLHttpRequest();
-			var url = "http://172.24.99.136:8080/medical/services/auth/remove";
+			var url = "http://172.24.99.138:8080/medical/services/auth/remove";
 			xhr.open("POST", url, true);
 			xhr.setRequestHeader("Content-type", "application/json");
 			xhr.onreadystatechange = function() {
