@@ -14,11 +14,11 @@ function consultarEpisodios(){
 	limpiarMensajes();
 	if (documento != ""){		
 		var inicio = new Date().getMilliseconds();
-		var url = "/medical/services/servidor/consultar/" + documento;
+		var url = "http://172.24.99.135:8000/medical/services/servidor/consultar/" + documento;
 		if (fechaInicio != "" && fechaFin != "" && $("#filtrar:checked").length > 0){
 			fechaInicio = (new Date(fechaInicio)).toISOString();
 			fechaFin = (new Date(fechaFin)).toISOString();
-			url = "/medical/services/servidor/consultarF/" + documento + "/" + fechaInicio + "/" + fechaFin;
+			url = "http://172.24.99.135:8000/medical/services/servidor/consultarF/" + documento + "/" + fechaInicio + "/" + fechaFin;
 		}
 		$.ajax({
 			type: "GET",
@@ -55,7 +55,7 @@ function detalleEpisodio(obj){
 			return false;
 		}
 	});	
-	var url = "/medical/services/servidor/analisis/" + JSON.stringify(dataEpisodio);
+	var url = "http://172.24.99.135:8000/medical/services/servidor/analisis/" + JSON.stringify(dataEpisodio);
 	$.ajax({
 		type: "GET",
 		url: url,		
