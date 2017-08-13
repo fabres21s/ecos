@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.97.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>
+            AWS.config.update({accessKeyId: 'AKIAJJIZ4MGNWTBIPUIA', secretAccessKey: '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'});
+            var s3BucketName = 'fileupload-test';
+            var s3RegionName = 'us-east-2';
+            
+            function uploadFile() {
+                var s3 = new AWS.S3({params: {Bucket: s3BucketName, Region: s3RegionName}});
+                var file = document.getElementById('fileToUpload').files[0];
+                if (file) {
+                    s3.putObject({Key: file.name, ContentType: file.type, Body: file, ACL: "public-read"},
+                    function(err, data) {
+                    	
+                    	console.log(err +" ::: "+data);
+                    	
+                        if (data !== null) {
+                            alert("si");
+                        }
+                        else {
+                            alert("no");
+                        }
+                    });
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <input type="file" id="fileToUpload"/>
+        <button onclick="uploadFile()">Upload to S3</button>
+    </body>
+</html>

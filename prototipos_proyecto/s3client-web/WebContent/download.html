@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.97.0.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+        AWS.config.update({accessKeyId: 'AKIAJJIZ4MGNWTBIPUIA', secretAccessKey: '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'});
+        var s3BucketName = 'fileupload-test';
+        var s3RegionName = 'us-east-2';
+            
+            function listObjs() {
+                var s3 = new AWS.S3({params: {Bucket: s3BucketName, Region: s3RegionName}});
+                s3.listObjects(function(error, data) {
+                    if (error === null) {
+                        var html_keys = 'Object Keys:<br />';
+                        var html_imgs = '';
+                        jQuery.each(data.Contents, function(index, obj) {
+                            var params = {Bucket: s3BucketName, Key: obj.Key};
+                            var url = s3.getSignedUrl('getObject', params);
+                            
+                            console.log(JSON.stringify(obj));
+                            
+                            html_keys += (index + ': ' + obj.Key + '<br />');
+                            html_imgs += "<a href='" + url + "']>Enlace </a><br/>";
+                        });
+                        jQuery("#objKeys").html(html_keys);
+                        jQuery("#objImgs").html(html_imgs);
+                    } else {
+                        console.log(error);
+                    }
+                });
+            }
+        </script>
+</head>
+<body>
+	<button onclick="listObjs()">S3 - List Objects</button>
+
+	<div id="objKeys"></div>
+	<div id="objImgs"></div>
+</body>
+</html>
