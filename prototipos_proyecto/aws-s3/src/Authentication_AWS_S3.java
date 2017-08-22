@@ -13,7 +13,7 @@ public abstract class Authentication_AWS_S3 {
 	
 	public Authentication_AWS_S3() {
 		
-		AWSCredentials credentials = new BasicAWSCredentials("AKIAJJIZ4MGNWTBIPUIA", "DKO1T+3dKkPfp7/nkDBaqaDKkC1zu3eWOzHjcDSL");
+		AWSCredentials credentials = new BasicAWSCredentials("asdfasdf", "asdgfasdf");
 		s3client = new AmazonS3Client(credentials);
 	}
 	
